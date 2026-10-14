@@ -59,7 +59,13 @@ export class RequiredRule extends Rule {
    * @returns {boolean} True when the value is present.
    */
   validate(value, field, formData) {
-    return value !== null && value !== undefined && value.trim() !== ''
+    if (typeof value === 'boolean') {
+      return value
+    }
+
+    return value !== null &&
+      value !== undefined &&
+      String(value).trim() !== ''
   }
 }
 
