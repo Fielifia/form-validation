@@ -1,5 +1,5 @@
 {
-  "name": "laboration-2",
+  "name": "form-validation",
   "version": "1.0.0",
   "description": "A reusable JavaScript module for form validation.",
   "type": "module",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Fielifia/1dv610-laboration-2.git"
+    "url": "git+https://github.com/Fielifia/form-validation.git"
   },
   "keywords": [
     "javascript",
@@ -19,7 +19,7 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Fielifia/1dv610-laboration-2/issues"
+    "url": "https://github.com/Fielifia/form-validation/issues"
   },
-  "homepage": "https://github.com/Fielifia/1dv610-laboration-2#readme"
+  "homepage": "https://github.com/Fielifia/form-validation#"
 }
