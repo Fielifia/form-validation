@@ -469,3 +469,33 @@ test('Failed validation presents several errors', () => {
   assert(result.success === false, 'Expected validation to fail')
   assert(result.errors.length === 2, 'Expected two validation errors')
 })
+
+
+test('RequiredRule accepts true for a checkbox', () => {
+  const field = new Field('terms')
+  field.addRule(new RequiredRule())
+
+  const validation = new Validation()
+  validation.addField(field)
+
+  const result = validation.validate({
+    terms: true
+  })
+
+  assert(result.success === true, 'Expected validation to succeed')
+})
+
+test('RequiredRule rejects false for a checkbox', () => {
+  const field = new Field('terms')
+  field.addRule(new RequiredRule())
+
+  const validation = new Validation()
+  validation.addField(field)
+
+  const result = validation.validate({
+    terms: false
+  })
+
+  assert(result.success === false, 'Expected validation to fail')
+  assert(result.errors.length === 1, 'Expected one validation error')
+})
