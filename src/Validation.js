@@ -60,22 +60,10 @@ class Validation {
     for (const field of this.fields) {
       const value = data[field.identifier]
 
-      const isEmpty = value === null
-        || value === undefined
-        || typeof value === 'string' && value.trim() === ''
-
-      if (isEmpty) {
-        const requiredRuleInstance = field.rules.find(r => r instanceof RequiredRule)
-
-        if (requiredRuleInstance) {
-          if (!requiredRuleInstance.validate(value, field, data)) {
-            result.success = false
-            const validationError = new ValidationError(field, requiredRuleInstance)
-            result.addError(validationError)
-          }
-        }
+      if (this.#handleEmptyValue(value, field, data, result)) {
         continue
       }
+
       for (const rule of field.rules) {
         if (!rule.validate(value, field, data)) {
           result.success = false
@@ -84,9 +72,37 @@ class Validation {
         }
       }
     }
+
     return result
   }
 
+  /**
+   * Handles empty values by checking whether the field has a RequiredRule.
+   * 
+   * @param {*} value - The field value.
+   * @param {Field} field - The field being validated.
+   * @param {Object} data - All submitted form data.
+   * @param {Result} result - The validation result to update.
+   * @return {boolean} True if the value is empty and has been handled.
+   */
+  #handleEmptyValue(value, field, data, result) {
+    const isEmpty = value === null
+      || value === undefined
+      || typeof value === 'string' && value.trim() === ''
+
+    if (!isEmpty) {
+      return false
+    }
+
+    const requiredRule = field.rules.find(rule => rule instanceof RequiredRule)
+
+    if (requiredRule && !requiredRule.validate(value, field, data)) {
+      result.success = false
+      result.addError(new ValidationError(field, requiredRule))
+    }
+
+    return true
+  }
 }
 
 export default Validation
