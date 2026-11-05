@@ -1,5 +1,9 @@
 import Field from '../src/Field.js'
-import { EmailRule, MinLengthRule, OnlyLettersRule, OnlyDigitsRule, RequiredRule } from '../src/Rule.js'
+import { RequiredRule } from '../src/rules/RequiredRule.js'
+import { EmailRule } from '../src/rules/EmailRule.js'
+import { MinLengthRule } from '../src/rules/MinLengthRule.js'
+import { OnlyDigitsRule } from '../src/rules/OnlyDigitsRule.js'
+import { OnlyLettersRule } from '../src/rules/OnlyLettersRule.js'
 import Validation from '../src/Validation.js'
 
 /**

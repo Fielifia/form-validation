@@ -11,7 +11,7 @@ class Result {
    * 
    * @param {boolean} success - Whether the validation was successful.
    */
-  constructor(success) {
+  constructor(success = true) {
     this.success = success
     this.errors = []
   }

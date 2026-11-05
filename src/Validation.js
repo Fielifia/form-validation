@@ -1,6 +1,6 @@
 import Result from './Result.js'
 import ValidationError from './ValidationError.js'
-import { RequiredRule } from './Rule.js'
+import { RequiredRule } from './rules/RequiredRule.js'
 
 /**
  * Coordinates validation of configured fields and their rules.
@@ -55,22 +55,10 @@ class Validation {
    * @return {Result} The validation result containing success status and errors. 
    */
   validate(data) {
-    const result = new Result(true)
+    const result = new Result()
 
     for (const field of this.fields) {
-      const value = data[field.identifier]
-
-      if (this.#handleEmptyValue(value, field, data, result)) {
-        continue
-      }
-
-      for (const rule of field.rules) {
-        if (!rule.validate(value, field, data)) {
-          result.success = false
-          const validationError = new ValidationError(field, rule)
-          result.addError(validationError)
-        }
-      }
+      this.#validateField(field, data, result)
     }
 
     return result
@@ -103,6 +91,29 @@ class Validation {
 
     return true
   }
+
+  /**
+   * Validates a single field against its configured rules.
+   * 
+   * @param {Field} field - The field to validate.
+   * @param {Object} data - All submitted form data.
+   * @param {Result} result - The validation result to update.
+   */
+  #validateField(field, data, result) {
+    const value = data[field.identifier]
+
+    if (this.#handleEmptyValue(value, field, data, result)) {
+      return
+    }
+
+    for (const rule of field.rules) {
+      if (!rule.validate(value, field, data)) {
+        result.success = false
+        result.addError(new ValidationError(field, rule))
+      }
+    }
+  }
 }
+
 
 export default Validation

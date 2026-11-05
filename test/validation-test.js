@@ -1,5 +1,17 @@
 import Field from '../src/Field.js'
-import { EmailRule, LowercaseRule, MatchingFieldsRule, MaxLengthRule, MaxValueRule, MinLengthRule, MinValueRule, NoCodeOrLinksRule, OnlyDigitsRule, OnlyLettersRule, RequiredRule, SpecialCharacterRule, UppercaseRule } from '../src/Rule.js'
+import { RequiredRule } from '../src/rules/RequiredRule.js'
+import { EmailRule } from '../src/rules/EmailRule.js'
+import { OnlyLettersRule } from '../src/rules/OnlyLettersRule.js'
+import { OnlyDigitsRule } from '../src/rules/OnlyDigitsRule.js'
+import { MinLengthRule } from '../src/rules/MinLengthRule.js'
+import { MaxLengthRule } from '../src/rules/MaxLengthRule.js'
+import { MinValueRule } from '../src/rules/MinValueRule.js'
+import { MaxValueRule } from '../src/rules/MaxValueRule.js'
+import { UppercaseRule } from '../src/rules/UppercaseRule.js'
+import { LowercaseRule } from '../src/rules/LowercaseRule.js'
+import { SpecialCharacterRule } from '../src/rules/SpecialCharacterRule.js'
+import { NoCodeOrLinksRule } from '../src/rules/NoCodeOrLinksRule.js'
+import { MatchingFieldsRule } from '../src/rules/MatchingFieldsRule.js'
 import Validation from '../src/Validation.js'
 
 /**
