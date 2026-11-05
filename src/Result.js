@@ -5,6 +5,7 @@
  *
  */
 class Result {
+  #errors = []
 
   /**
    * Creates a new validation result.
@@ -13,7 +14,15 @@ class Result {
    */
   constructor(success = true) {
     this.success = success
-    this.errors = []
+  }
+
+  /**
+   * Returns the validation errors.
+   * 
+   * @returns {Array} The validation errors.
+   */
+  get errors() {
+    return [...this.#errors]
   }
 
   /**
@@ -22,7 +31,7 @@ class Result {
    * @param {ValidationError} validationError - The error produced vy a failed rule.
    */
   addError(validationError) {
-    this.errors.push(validationError)
+    this.#errors.push(validationError)
   }
 
 }
