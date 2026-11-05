@@ -4,6 +4,7 @@
  * A field has a unique identifier and a collection of validation rules.
  */
 class Field {
+  #rules = []
 
   /**
    * Creates a new field.
@@ -12,7 +13,15 @@ class Field {
    */
   constructor(identifier) {
     this.identifier = identifier
-    this.rules = []
+  }
+
+  /**
+   * Returns the validation rules associated with the field.
+   *
+   * @returns {Array} The field's validation rules.
+   */
+  get rules() {
+    return[...this.#rules]
   }
 
   /**
@@ -27,9 +36,8 @@ class Field {
     if (this.rules.some(existingRule => existingRule.constructor === rule.constructor)) {
       throw new Error(`Rule already exists for field ${this.identifier}`)
     }
-    this.rules.push(rule)
+    this.#rules.push(rule)
   }
-
 }
 
 export default Field
